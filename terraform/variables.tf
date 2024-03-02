@@ -10,5 +10,5 @@ variable "environment" {
 
 variable "hosted_site_name" {
   type    = string
-  default = "www.s3-hosted-site.projects.bolu.cloud"
+  default = "s3-hosted-site.demo.bolu.cloud"
 }
