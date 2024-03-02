@@ -1,23 +1,16 @@
 terraform {
-  backend "remote" {
-    hostname     = "app.terraform.io"
-    organization = "bolucloud"
-
-    workspaces {
-      name = "s3-hosted-site"
-    }
-  }
-
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.9.0"
+      version = "~> 5.39.0"
     }
   }
-}
 
-provider "aws" {
-  region     = var.aws_region
-  access_key = var.AWS_ACCESS_KEY_ID
-  secret_key = var.AWS_SECRET_ACCESS_KEY
+  backend "s3" {
+    bucket         	   = "bolucloud-tfstate"
+    key              	   = "state/s3-hosted-site.tfstate"
+    region         	   = "us-east-1"
+    encrypt        	   = true
+    dynamodb_table = "bolucloud_tf_lockid"
+  }
 }
