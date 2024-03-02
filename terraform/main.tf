@@ -7,10 +7,10 @@ terraform {
   }
 
   backend "s3" {
-    bucket         	   = "bolucloud-tfstate"
-    key              	   = "state/s3-hosted-site.tfstate"
-    region         	   = "us-east-1"
-    encrypt        	   = true
+    bucket         = "bolucloud-tfstate"
+    key            = "state/s3-hosted-site.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
     dynamodb_table = "bolucloud_tf_lockid"
   }
 }
