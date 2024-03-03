@@ -12,21 +12,18 @@ resource "aws_s3_bucket_policy" "s3_hosted_site_allow_public_access_policy" {
   policy = data.aws_iam_policy_document.s3_hosted_site_allow_public_access_bucket_policy.json
 }
 
-resource "aws_s3_bucket_public_access_block" "s3_hosted_site_allow_public_access" {
-  bucket = aws_s3_bucket.s3_hosted_site.id
-
-  block_public_acls       = false
-  block_public_policy     = false
-  ignore_public_acls      = false
-  restrict_public_buckets = false
-}
 
 data "aws_iam_policy_document" "s3_hosted_site_allow_public_access_bucket_policy" {
   statement {
-    sid       = "PublicReadGetObject"
-    actions   = ["s3:GetObject"]
-    resources = ["arn:aws:s3:::s3-hosted-site.demo.bolu.cloud/*"]
-
+    sid = "PublicReadGetObject"
+    actions = [
+      "s3:GetObject",
+      "s3:ListBucket"
+    ]
+    resources = [
+      "arn:aws:s3:::www.bolucloudtestbucket.demo.bolu.cloud/*",
+      "arn:aws:s3:::www.bolucloudtestbucket.demo.bolu.cloud"
+    ]
     principals {
       type        = "*"
       identifiers = ["*"]
