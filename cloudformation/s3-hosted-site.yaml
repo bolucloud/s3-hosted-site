@@ -1,0 +1,60 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Deploy a static website with S3, CloudFront, and ACM SSL
+
+Parameters:
+  DomainName:
+    Type: String
+    Description: Domain name for the website
+
+Resources:
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub ${DomainName}
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+
+  TestBucketDemoBoluCloudFront:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Origins:
+          - Id: S3Origin
+            DomainName: !GetAtt MyS3Bucket.DomainName
+            S3OriginConfig:
+              OriginAccessIdentity: ''
+        DefaultRootObject: index.html
+        DefaultCacheBehavior:
+          TargetOriginId: S3Origin
+          ForwardedValues:
+            QueryString: false
+          ViewerProtocolPolicy: allow-all
+        Enabled: true
+        Aliases:
+          - !Ref DomainName
+        ViewerCertificate:
+          AcmCertificateArn: !Ref DemoBoluCloudCertificate
+          SslSupportMethod: sni-only
+        DefaultRootObject: index.html
+
+  DemoBoluCloudCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !Ref DomainName
+      ValidationMethod: DNS
+
+MyDNSRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneName: "demo.bolu.cloud"
+      Name: !Ref DomainName
+      Type: A
+      AliasTarget:
+        DNSName: !GetAtt TestBucketDemoBoluCloudFront.DomainName
+        HostedZoneId: Z02723001MQFQ4IPRXCRA
+
+Outputs:
+  WebsiteURL:
+    Value: !Sub 'https://${TestBucketDemoBoluCloudFront.DomainName}'
+    Description: Cloudfront URL for the deployed website

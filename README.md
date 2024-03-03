@@ -1,9 +1,8 @@
-
 # Static Website Hosting on S3 via Cloudfront
 
 
 ## Overview
-This infrastructure is built to deploy the necessary AWS services needed to host a secure static website using a S3 bucket, ACM Certificate Manager, Cloudfront
+This infrastructure is built to deploy the necessary AWS services needed to host a secure static website using a S3 bucket, ACM Certificate Manager, Cloudfront and Route53.
 
 
 ## Features
@@ -24,4 +23,4 @@ This infrastructure is built to deploy the necessary AWS services needed to host
 ![s3-hosted-site bolucloud architecture diagram](./s3-hosted-site.drawio.svg)
 
 ## Blog
-Detailed writeup for this project can be found on my blog 👉🏿 
+Detailed writeup for this project can be found on my blog 👉🏿 https://bolu.cloud/2024/03/03/static-website-hosting-on-aws-s3-via-cloudfront/
