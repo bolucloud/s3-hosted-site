@@ -8,16 +8,19 @@ resource "aws_iam_access_key" "github_s3_hosted_site_user_key" {
 
 data "aws_iam_policy_document" "github_s3_hosted_site_user_policy_document" {
   statement {
-    effect    = "Allow"
-    actions   = ["s3:ListAllBuckets"]
+    effect = "Allow"
+    actions = [
+      "s3:ListAllBuckets"
+    ]
     resources = ["*"]
   }
+
   statement {
     effect = "Allow"
     actions = [
       "s3:Get*",
       "s3:List*",
-      "s3:Put*"
+      "s3:PutObject"
     ]
     resources = [
       "arn:aws:s3:::www.bolucloudtestbucket.demo.bolu.cloud/*",
