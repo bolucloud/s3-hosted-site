@@ -23,4 +23,6 @@ This infrastructure is built to deploy the necessary AWS services needed to host
 ![s3-hosted-site bolucloud architecture diagram](./s3-hosted-site.drawio.svg)
 
 ## Blog
-Detailed writeup for this project can be found on my blog 👉🏿 https://bolu.cloud/2024/03/03/static-website-hosting-on-aws-s3-via-cloudfront/
+Detailed writeup for this project can be found on my blog: 
+Part 1 👉🏿 https://bolu.cloud/2024/03/03/static-website-hosting-on-aws-s3-via-cloudfront/
+Part 2 👉🏿 https://bolu.cloud/2024/03/24/part-2-static-website-hosting-on-aws-s3-github-actions-ci-cd/
